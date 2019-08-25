@@ -1,3 +1,50 @@
-<p>
-  register works!
-</p>
+
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="card">
+      <div class="card-header">
+        <h3>Sign up</h3>
+      </div>
+      <div class="card-body">
+        <form class="mb-6" [formGroup]="registerForm">
+          <div class="form-group">
+            <label for="name" id="label">Name</label>
+            <input type="text" class="form-control form-control-sm" placeholder="Enter your full name"
+              formControlName="name" />
+          </div>
+          <div class="form-group">
+            <label for="name" id="label">Username</label>
+            <input type="text" class="form-control form-control-sm" placeholder="Enter your username"
+              formControlName="username" />
+          </div>
+          <div class="form-group">
+            <label for="eMail" id="label">E-Mail</label>
+            <input type="text" class="form-control form-control-sm" placeholder="Enter your E-Mail address"
+              formControlName="email" />
+          </div>
+          <div class="form-group">
+            <label for="password" id="label">Password</label>
+            <input type="password" class="form-control form-control-sm" id="password" placeholder="Enter your password"
+              formControlName="password"
+              [ngClass]="{
+                'border-bm-red':
+                  password.invalid &&
+                  (password.dirty || password.touched),
+                'border-bm-green':
+                  password.valid && (password.dirty || password.touched)
+              }" />
+              <p
+              class="text-white mt-1"
+              *ngIf="password.touched && !!password.errors?.required"
+            >
+              This field is required
+            </p>
+          </div>
+          <button class="btn btn-sm btn-block" (click)="onSignupClick()">
+            Sign up
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
