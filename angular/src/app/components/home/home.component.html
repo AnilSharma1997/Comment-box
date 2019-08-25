@@ -1,3 +1,42 @@
-<p>
-  home works!
-</p>
+<div class="container pb-cmnt-container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card card-info">
+        <div class="card-block">
+          <form [formGroup]="commentDescription">
+            <div class="form-group">
+              <textarea type="text" formControlName="comment" class="form-control pb-cmnt-textarea "
+                placeholder="Type a Comment..."></textarea>
+            </div>
+            <div class="mt-1 mb-2 ml-2">
+              <button class="btn btn-danger" (click)="onComment()">Post Comment</button>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-12" *ngFor="let comment of loadedComments; let i = index">
+          <div class="card-block">
+            <div class="row" style="padding-left: 20px;">
+              <div class="col-md-8">
+                <b>{{i+1}}.&nbsp; &nbsp;{{comment.author.username}}</b> <br>
+                {{comment.text}}
+              </div>
+              <div class="col-md-4">
+                <button type="submit" class="btn btn-link" style="height: 20px;color: green"
+                  (click)="onUpvote(comment)">
+                  <img src="../../../assets/like.png" alt="" style="height: 20px;"> {{comment.upvote.length}} upvote
+                </button>
+                <button type="submit" class="btn btn-link" style="height: 20px; color: red"
+                  (click)="onDownvote(comment)">
+                  <img src="../../../assets/dislike.png" alt="" style="height: 20px;"> {{comment.downvote.length}}
+                  downvote
+                </button>
+                <br>
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
