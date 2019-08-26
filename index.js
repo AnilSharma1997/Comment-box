@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 app.use(cors({ origin: '*' }));
 
 //Port Number
-//const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8080;
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -27,4 +27,4 @@ app.use('/users', userController);
 app.use('/comments', commentController);
 
 // Start Server
-app.listen(3000, () => console.log('Server started at port :3000'));
+app.listen(port, () => console.log('Server started at port :'+port));

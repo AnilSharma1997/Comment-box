@@ -7,15 +7,15 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class AuthService {
 	authToken: any;
 	user: any;
-	readonly baseURL = 'http://localhost:3000/';
+	//readonly baseURL = 'http://localhost:3000/';
 	constructor(private http: HttpClient) {}
 
 	registerUser(userData) {
-		return this.http.post(this.baseURL+'users/register', userData);
+		return this.http.post('users/register', userData);
 	}
 
 	authenticateUser(userData) {
-		return this.http.post(this.baseURL+'users/authenticate', userData);
+		return this.http.post('users/authenticate', userData);
 	}
 
 	loggedIn() {
@@ -30,12 +30,12 @@ export class AuthService {
 		localStorage.setItem('user', JSON.stringify(user));
 		this.authToken = token;
 		this.user = user;
-  }
-  
-  loadUser() {
-    const user = localStorage.getItem('user');
-    return JSON.parse(user);
-  }
+	}
+
+	loadUser() {
+		const user = localStorage.getItem('user');
+		return JSON.parse(user);
+	}
 
 	logout() {
 		this.authToken = null;
@@ -44,19 +44,20 @@ export class AuthService {
 	}
 
 	getCommentList() {
-		return this.http.get(this.baseURL+'comments');
+		return this.http.get('comments');
 	}
 
 	comment(comment) {
-    let user = this.loadUser();
-    const data ={
-      text : comment,
-      author : {
-        id : user.id,
-        username : user.username
-      }
-    }
-		return this.http.post(this.baseURL+'comments', data);
+		let user = this.loadUser();
+		const data = {
+			text: comment,
+			author:
+				{
+					id: user.id,
+					username: user.username
+				}
+		};
+		return this.http.post('comments', data);
 	}
 
 	commentupvote(data) {
@@ -64,7 +65,7 @@ export class AuthService {
 		let userid = {
 			id: data.id
 		};
-		return this.http.put(this.baseURL+'comments/upvote/' + comid, userid);
+		return this.http.put('comments/upvote/' + comid, userid);
 	}
 
 	commentdownvote(data) {
@@ -72,6 +73,6 @@ export class AuthService {
 		let userid = {
 			id: data.id
 		};
-		return this.http.put(this.baseURL+'comments/downvote/' + comid, userid);
+		return this.http.put('comments/downvote/' + comid, userid);
 	}
 }
